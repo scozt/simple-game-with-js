@@ -87,6 +87,28 @@ function handleKeyEvent(event) {
             setCheckboxValuesTo(true);
 
         }
+    } else {
+
+        // reset values
+        GAME.currentRowId = 9;
+        GAME.checkedColumns = [6, 7, 8, 9, 10, 11, 12];
+        GAME.previousRowCheckedColumns = [6, 7, 8, 9, 10, 11, 12];
+        GAME.valuesMovingDirection = TO_LEFT;
+
+        // remove the checkbox values except the first row from bottom
+        let rows = document.getElementsByClassName("row");
+        for(let row = 0; row < (GAME.ROWS - 1); row++){
+
+            let checkboxes = rows.item(row).getElementsByTagName("input");
+            for(let checkbox of checkboxes) {
+
+                checkbox.checked = false;
+            }
+        }
+
+        showGameStatus("hit spacebar to play");
+
+        startGame();
     }
 }
 
