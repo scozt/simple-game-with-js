@@ -16,6 +16,24 @@ const GAME = {
     checkboxValuesMovingDirection: TO_LEFT,
 }
 
+const showGameStatus = (message) => {
+
+    clearInterval(GAME.intervalId);
+    GAME.intervalId = undefined;
+
+    let gameStatusDiv = document.getElementById("gameStatus");
+    if( gameStatusDiv === null) {
+
+        const containerDiv = document.getElementById("container");
+
+        gameStatusDiv = document.createElement("div");
+        gameStatusDiv.id = "gameStatus";
+        containerDiv.appendChild(gameStatusDiv);
+    }
+    gameStatusDiv.innerHTML = "";
+    gameStatusDiv.innerHTML = message;
+};
+
 for (let row = 0; row < GAME.ROWS; row++) {
     const div = document.createElement("div");
     div.className = "row";
@@ -67,25 +85,11 @@ const startGame = () => {
     GAME.intervalId = window.setInterval(startMovingCheckboxValues, 70);
 };
 
+
+showGameStatus("hit spacebar to play");
 startGame();
 
-const showGameStatus = (message) => {
 
-    clearInterval(GAME.intervalId);
-    GAME.intervalId = undefined;
-
-    let gameStatusDiv = document.getElementById("gameStatus");
-    if( gameStatusDiv === null) {
-
-        const containerDiv = document.getElementById("container");
-
-        gameStatusDiv = document.createElement("div");
-        gameStatusDiv.id = "gameStatus";
-        containerDiv.appendChild(gameStatusDiv);
-    }
-    gameStatusDiv.innerHTML = "";
-    gameStatusDiv.innerHTML = message;
-};
 
 function handleKeyEvent(event) {
     if(event.code === "Space" && GAME.intervalId !== undefined) {
