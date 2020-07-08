@@ -71,6 +71,7 @@ startGame();
 
 function handleKeyEvent(event) {
     if(event.code === "Space" && GAME.intervalId !== undefined) {
-        console.log("space key :)");
+        const overlappingColumnValues =
+            GAME.checkedColumns.filter((columnValue) => GAME.previousRowCheckedColumns.includes(columnValue));
     }
 }
