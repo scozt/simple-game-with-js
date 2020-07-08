@@ -73,5 +73,20 @@ function handleKeyEvent(event) {
     if(event.code === "Space" && GAME.intervalId !== undefined) {
         const overlappingColumnValues =
             GAME.checkedColumns.filter((columnValue) => GAME.previousRowCheckedColumns.includes(columnValue));
+
+        GAME.previousRowCheckedColumns = GAME.checkedColumns;
+        GAME.checkedColumns = overlappingColumnValues;
+
+        if(overlappingColumnValues.length === 0) {
+            console.log("you lost - hit spacebar to restart game")
+
+        } else if( overlappingColumnValues.length > 0 && GAME.currentRowId === 0) {
+            console.log("you won - hit spacebar to restart game")
+
+        } else {
+            GAME.currentRowId--;
+            setCheckboxValuesTo(true);
+
+        }
     }
 }
