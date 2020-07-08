@@ -34,20 +34,6 @@ const showGameStatus = (message) => {
     gameStatusDiv.innerHTML = message;
 };
 
-for (let row = 0; row < GAME.ROWS; row++) {
-    const div = document.createElement("div");
-    div.className = "row";
-    div.id = row;
-
-    for (let column = 0; column < GAME.COLUMNS; column++) {
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.id = column;
-        div.appendChild(checkbox);
-    }
-
-    document.getElementById("container").appendChild(div);
-}
 const setCheckboxValuesTo = (value) => {
     const row = document.getElementById("container").childNodes.item([GAME.currentRowId]);
     const checkboxes = row.getElementsByTagName("input");
@@ -57,7 +43,12 @@ const setCheckboxValuesTo = (value) => {
     }
 };
 
-setCheckboxValuesTo(true);
+const startGame = () => {
+
+    GAME.currentRowId--;
+    setCheckboxValuesTo(true);
+    GAME.intervalId = window.setInterval(startMovingCheckboxValues, 70);
+};
 
 const startMovingCheckboxValues = () => {
 
@@ -77,19 +68,6 @@ const startMovingCheckboxValues = () => {
 
     setCheckboxValuesTo(true);
 };
-
-const startGame = () => {
-
-    GAME.currentRowId--;
-    setCheckboxValuesTo(true);
-    GAME.intervalId = window.setInterval(startMovingCheckboxValues, 70);
-};
-
-
-showGameStatus("hit spacebar to play");
-startGame();
-
-
 
 function handleKeyEvent(event) {
     if(event.code === "Space" && GAME.intervalId !== undefined) {
@@ -111,3 +89,22 @@ function handleKeyEvent(event) {
         }
     }
 }
+
+for (let row = 0; row < GAME.ROWS; row++) {
+    const div = document.createElement("div");
+    div.className = "row";
+    div.id = row;
+
+    for (let column = 0; column < GAME.COLUMNS; column++) {
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = column;
+        div.appendChild(checkbox);
+    }
+
+    document.getElementById("container").appendChild(div);
+}
+setCheckboxValuesTo(true);
+
+showGameStatus("hit spacebar to play");
+startGame();
