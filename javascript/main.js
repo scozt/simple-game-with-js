@@ -69,6 +69,24 @@ const startGame = () => {
 
 startGame();
 
+const showGameStatus = (message) => {
+
+    clearInterval(GAME.intervalId);
+    GAME.intervalId = undefined;
+
+    let gameStatusDiv = document.getElementById("gameStatus");
+    if( gameStatusDiv === null) {
+
+        const containerDiv = document.getElementById("container");
+
+        gameStatusDiv = document.createElement("div");
+        gameStatusDiv.id = "gameStatus";
+        containerDiv.appendChild(gameStatusDiv);
+    }
+    gameStatusDiv.innerHTML = "";
+    gameStatusDiv.innerHTML = message;
+};
+
 function handleKeyEvent(event) {
     if(event.code === "Space" && GAME.intervalId !== undefined) {
         const overlappingColumnValues =
@@ -78,11 +96,10 @@ function handleKeyEvent(event) {
         GAME.checkedColumns = overlappingColumnValues;
 
         if(overlappingColumnValues.length === 0) {
-            console.log("you lost - hit spacebar to restart game")
+            showGameStatus("you lost - hit spacebar to restart game")
 
         } else if( overlappingColumnValues.length > 0 && GAME.currentRowId === 0) {
-            console.log("you won - hit spacebar to restart game")
-            window.clearInterval(GAME.intervalId);
+            showGameStatus("you won - hit spacebar to restart game")
         } else {
             GAME.currentRowId--;
             setCheckboxValuesTo(true);
