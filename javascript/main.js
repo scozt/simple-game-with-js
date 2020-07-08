@@ -5,6 +5,9 @@ document.body.appendChild(div);
 const GAME = {
     ROWS: 10,
     COLUMNS: 19,
+    checkedColumns: [6, 7, 8, 9, 10, 11, 12],
+    previousRowCheckedColumns: [6, 7, 8, 9, 10, 11, 12],
+    currentRowId: 9,
 }
 
 for (let row = 0; row < GAME.ROWS; row++) {
@@ -21,3 +24,13 @@ for (let row = 0; row < GAME.ROWS; row++) {
 
     document.getElementById("container").appendChild(div);
 }
+const setCheckboxValuesTo = (value) => {
+    console.log('hello');
+    const row = document.getElementById("container").childNodes.item([GAME.currentRowId]);
+    const checkboxes = row.getElementsByTagName("input");
+
+    for(let column of GAME.checkedColumns){
+        checkboxes.item(column).checked = value;
+    }
+};
+setCheckboxValuesTo(true);
