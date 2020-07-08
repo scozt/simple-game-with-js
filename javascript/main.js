@@ -1,3 +1,4 @@
+window.onkeyup = handleKeyEvent;
 const div = document.createElement("div");
 div.id = "container";
 document.body.appendChild(div);
@@ -30,7 +31,6 @@ for (let row = 0; row < GAME.ROWS; row++) {
     document.getElementById("container").appendChild(div);
 }
 const setCheckboxValuesTo = (value) => {
-    console.log('hello');
     const row = document.getElementById("container").childNodes.item([GAME.currentRowId]);
     const checkboxes = row.getElementsByTagName("input");
 
@@ -68,3 +68,9 @@ const startGame = () => {
 };
 
 startGame();
+
+function handleKeyEvent(event) {
+    if(event.code === "Space" && GAME.intervalId !== undefined) {
+        console.log("space key :)");
+    }
+}
