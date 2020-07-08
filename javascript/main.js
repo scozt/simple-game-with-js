@@ -82,7 +82,7 @@ function handleKeyEvent(event) {
 
         } else if( overlappingColumnValues.length > 0 && GAME.currentRowId === 0) {
             console.log("you won - hit spacebar to restart game")
-
+            window.clearInterval(GAME.intervalId);
         } else {
             GAME.currentRowId--;
             setCheckboxValuesTo(true);
