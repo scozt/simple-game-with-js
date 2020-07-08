@@ -14,3 +14,9 @@ html, body {
     justify-content: center;
     flex-direction: column;
 }
+
+#gameStatus {
+    color: black;
+    padding: 1rem;
+    text-transform: uppercase;
+}
